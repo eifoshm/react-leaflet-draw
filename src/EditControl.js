@@ -15,6 +15,7 @@ export default class EditControl extends LayersControl {
     onDeleteStop: PropTypes.func,
     onMounted: PropTypes.func,
     draw: PropTypes.object,
+    edit: PropTypes.object,
     position: PropTypes.oneOf([
       'topright',
       'topleft',
@@ -83,7 +84,7 @@ export default class EditControl extends LayersControl {
 
   updateDrawControls = () => {
     const { layerContainer } = this.context;
-    const { draw, position } = this.props;
+    const { draw, position, edit } = this.props;
     const options = {
       edit: {
         featureGroup: layerContainer
@@ -92,6 +93,10 @@ export default class EditControl extends LayersControl {
 
     if (draw) {
       options.draw = draw;
+    }
+
+    if (edit) {
+      options.edit = Object.assign(options.edit, edit)
     }
 
     if (position) {
